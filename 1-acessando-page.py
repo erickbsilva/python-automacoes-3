@@ -13,3 +13,5 @@ browser.get("http://www.amazon.com.br")
 elem = browser.find_element(By.ID, "twotabsearchtextbox")
 elem.send_keys("ps5")
 elem.send_keys(Keys.ENTER)
+
+browser.quit()
