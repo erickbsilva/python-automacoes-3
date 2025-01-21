@@ -41,10 +41,28 @@ try:
     tot_pages = qtd_results / 10
     print(f"Número de páginas {round(tot_pages)}")
 
-except Exception as e:
-    print("Erro encontrado:")
-    print(e)
+    # 7 - Navegando entre páginas
+    url_page = browser.find_element(
+        By.XPATH, '//a[@aria-label="Page 2"]'
+    ).get_attribute("href")
 
-finally:
-    # Certifique-se de que o navegador será fechado
-    browser.quit()
+    current_page = 0
+    start = 10
+    list_results = []
+
+    while current_page <= 10:
+        if not current_page == 0:
+            url_page = url_page.replace(
+                "start=%s" % start,
+                "start=%s" % (start + 10),
+            )
+            start += 10
+        current_page += 1
+        browser.get(url_page)
+
+except Exception as e:
+    print(f"Erro encontrado: {e}")
+
+# finally:
+# Certifique-se de que o navegador será fechado
+# browser.quit()
