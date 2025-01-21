@@ -47,22 +47,31 @@ try:
     ).get_attribute("href")
 
     current_page = 0
-    start = 10
+    start = 1
     list_results = []
 
     while current_page <= 10:
         if not current_page == 0:
             url_page = url_page.replace(
-                "start=%s" % start,
-                "start=%s" % (start + 10),
+                "first=%s" % start,
+                "first=%s" % (start + 10),
             )
             start += 10
         current_page += 1
         browser.get(url_page)
 
+    # 8 - Recuperando informações
+    divs = browser.find_elements(By.XPATH, '//li[@class="b_algo"]')
+    for div in divs:
+        name = div.find_element(By.TAG_NAME, "h2")
+        link = div.find_element(By.TAG_NAME, "a")
+        result = "%s,%s" % (name.text, link.get_attribute("href"))
+        print(result)
+        list_results.append(result)
+
 except Exception as e:
     print(f"Erro encontrado: {e}")
 
 # finally:
-# Certifique-se de que o navegador será fechado
-# browser.quit()
+#     # Certifique-se de que o navegador será fechado
+#     browser.quit()
