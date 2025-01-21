@@ -33,10 +33,6 @@ try:
         results.split("About ")[1].split(" results")[0].replace(",", "")
     )
 
-    numero = int(results.split("About ")[1].split(" results")[0].replace(",", ""))
-    print(numero)
-    # qtd_results
-    # print(int(numero))
     print(f"Número de resultados formatado: {qtd_results}")
     tot_pages = qtd_results / 10
     print(f"Número de páginas {round(tot_pages)}")
@@ -69,9 +65,14 @@ try:
         print(result)
         list_results.append(result)
 
+    # 9 - Salvando em arquivo txt
+    with open("results_term.txt", "w", encoding="utf-8") as file:
+        for result in list_results:
+            file.write("%s\n" % result)
+
 except Exception as e:
     print(f"Erro encontrado: {e}")
 
-# finally:
-#     # Certifique-se de que o navegador será fechado
-#     browser.quit()
+finally:
+    # Certifique-se de que o navegador será fechado
+    browser.quit()
