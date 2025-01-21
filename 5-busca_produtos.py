@@ -19,3 +19,19 @@ element = browser.find_element(
 )
 print(element)
 time.sleep(2)
+
+# 4 - Encontrar informações dos produtos
+items = element.find_elements(By.XPATH, '//div[@data-component-type="s-search-result"]')
+print(len(items))
+
+for item in items:
+    title = item.find_element(By.TAG_NAME, "h2").text
+    price = ""
+
+    try:
+        price = item.find_element(By.CLASS_NAME, "a-price").text.replace("\\n", ".")
+    except:
+        pass
+
+    print(f"Título: {title}")
+    print(f"Preço: {price}")
