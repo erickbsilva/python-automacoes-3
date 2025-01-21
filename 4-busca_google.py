@@ -24,9 +24,22 @@ try:
     # 5 - Esperando os resultados carregarem
     time.sleep(2)
 
-    # 6 - Encontrando o elemento que contém o número de resultados
+    # 5 - Retornando a Qtd de Registros
     results = browser.find_element(By.CLASS_NAME, "sb_count").text
     print(f"Foram encontrados {results}")
+
+    # 6 - Retornando o Número de Páginas
+    qtd_results = float(
+        results.split("About ")[1].split(" results")[0].replace(",", "")
+    )
+
+    numero = int(results.split("About ")[1].split(" results")[0].replace(",", ""))
+    print(numero)
+    # qtd_results
+    # print(int(numero))
+    print(f"Número de resultados formatado: {qtd_results}")
+    tot_pages = qtd_results / 10
+    print(f"Número de páginas {round(tot_pages)}")
 
 except Exception as e:
     print("Erro encontrado:")
